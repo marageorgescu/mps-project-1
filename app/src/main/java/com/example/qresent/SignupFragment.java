@@ -30,24 +30,9 @@ public class SignupFragment extends Fragment {
 
         changeHighlightButton(binding.studentBtn, binding);
 
-        binding.studentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeHighlightButton(binding.studentBtn, binding);
-            }
-        });
-        binding.teacherBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeHighlightButton(binding.teacherBtn, binding);
-            }
-        });
-        binding.adminBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeHighlightButton(binding.adminBtn, binding);
-            }
-        });
+        binding.studentBtn.setOnClickListener(v -> changeHighlightButton(binding.studentBtn, binding));
+        binding.teacherBtn.setOnClickListener(v -> changeHighlightButton(binding.teacherBtn, binding));
+        binding.adminBtn.setOnClickListener(v -> changeHighlightButton(binding.adminBtn, binding));
 
         return binding.getRoot();
     }

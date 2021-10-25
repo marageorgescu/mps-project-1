@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_qrReaderFragment"
+            app:destination="@id/qrReaderFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.example.qresent.SignupFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup" />
+    <fragment
+        android:id="@+id/qrReaderFragment"
+        android:name="com.example.qresent.QrReaderFragment"
+        android:label="fragment_qr_reader"
+        tools:layout="@layout/fragment_qr_reader" />
 </navigation>
