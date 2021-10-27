@@ -27,7 +27,6 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.qresent.databinding.FragmentQrReaderBinding;
 import com.example.qresent.databinding.FragmentSignupBinding;
 import com.google.zxing.Result;
-import com.karumi.dexter.Dexter;
 
 import java.util.ArrayList;
 import java.util.List;
