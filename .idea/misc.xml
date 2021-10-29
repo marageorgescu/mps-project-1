@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/CursuriFacultate/MPS/mps-project-1/app/src/main/res/layout/fragment_qr_generator.xml" value="0.1793478260869565" />
+        <entry key="..\:/CursuriFacultate/MPS/mps-project-1/app/src/main/res/layout/fragment_qr_reader.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/mps-project-1/app/src/main/res/layout/activity_main.xml" value="0.23867753623188406" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/mps-project-1/app/src/main/res/layout/fragment_login.xml" value="0.2056159420289855" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/mps-project-1/app/src/main/res/layout/fragment_qr_reader.xml" value="0.11614583333333334" />

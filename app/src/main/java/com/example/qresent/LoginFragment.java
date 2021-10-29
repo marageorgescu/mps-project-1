@@ -82,7 +82,11 @@ public class LoginFragment extends Fragment {
                 String password = Objects.requireNonNull(binding.passwordET.getText()).toString().trim();
                 if (checkValidityEmailAndPassword(email, password)) {
                     firebaseAuthWithEmailAndPassword(email, password, v);
+                    Navigation.findNavController(v)
+                            .navigate(R.id.action_loginFragment_to_qrGeneratorFragment);
                 }
+
+
             }
         });
 
@@ -133,6 +137,7 @@ public class LoginFragment extends Fragment {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user, view);
+
                         } else {
                             // If sign in fails, try to create a new account
 
