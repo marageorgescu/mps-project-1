@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_loginFragment_to_qrGeneratorFragment"
             app:destination="@id/qrGeneratorFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_coursesFragment"
+            app:destination="@id/coursesFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -35,4 +38,9 @@
         android:name="com.example.qresent.QrGeneratorFragment"
         android:label="fragment_qr_generator"
         tools:layout="@layout/fragment_qr_generator" />
+    <fragment
+        android:id="@+id/coursesFragment"
+        android:name="com.example.qresent.CoursesFragment"
+        android:label="fragment_courses"
+        tools:layout="@layout/fragment_courses" />
 </navigation>
