@@ -120,7 +120,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/microsoft"
+                android:src="@drawable/facebookicon"
                 android:scaleType="fitCenter"
                 android:background="@drawable/roundcorner"
                 android:adjustViewBounds="true"
