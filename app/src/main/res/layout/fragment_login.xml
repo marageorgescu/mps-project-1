@@ -115,16 +115,13 @@
                 android:adjustViewBounds="true"
                 android:layout_gravity="center_horizontal"/>
 
-            <ImageButton
-                android:id="@+id/microsoftSignInBtn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/facebookicon"
-                android:scaleType="fitCenter"
-                android:background="@drawable/roundcorner"
-                android:adjustViewBounds="true"
-                android:layout_gravity="center_horizontal"/>
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/facebookSignInBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp" />
 
             <View
                 android:layout_width="0dp"

@@ -1,8 +1,11 @@
 package com.example.qresent;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,6 +28,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.qresent.databinding.FragmentLoginBinding;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -35,9 +43,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,12 +66,18 @@ public class LoginFragment extends Fragment {
     private GoogleSignInClient mGoogleSignInClient;
     private FragmentLoginBinding binding;
 
+    private CallbackManager callbackManager;
+
+
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
+
+
+        //AppEventsLogger.activateApp(getContext());
     }
 
     @Override
@@ -72,6 +90,8 @@ public class LoginFragment extends Fragment {
                 false
         );
         mAuth = FirebaseAuth.getInstance();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
 
         checkAndRequestPermissions();
         binding.signUpTV.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_signupFragment));
@@ -82,7 +102,11 @@ public class LoginFragment extends Fragment {
                 String password = Objects.requireNonNull(binding.passwordET.getText()).toString().trim();
                 if (checkValidityEmailAndPassword(email, password)) {
                     firebaseAuthWithEmailAndPassword(email, password, v);
+                    Navigation.findNavController(v)
+                            .navigate(R.id.action_loginFragment_to_qrGeneratorFragment);
                 }
+
+
             }
         });
 
@@ -92,7 +116,45 @@ public class LoginFragment extends Fragment {
                 v -> signIn()
         );
 
+
+        binding.facebookSignInBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d(TAG, "succes!" + loginResult);
+                handleFacebookToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(@NonNull FacebookException e) {
+
+            }
+        });
+
         return binding.getRoot();
+    }
+
+    private void handleFacebookToken(AccessToken accessToken) {
+        Log.d(TAG, "Access token" + accessToken);
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        mAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "task is successful");
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    //updateUI();
+                } else {
+                    Log.d(TAG, "task failed");
+                }
+            }
+        });
+
     }
 
     private boolean checkValidityEmailAndPassword(String email, String password) {
@@ -137,13 +199,10 @@ public class LoginFragment extends Fragment {
                         } else {
                             // If sign in fails, try to create a new account
 
-                            /*createAccount(email, password);
+                            createAccount(email, password);
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            updateUI(user, view);*/
-
-                            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_signupFragment);
-
+                            updateUI(user, view);
                         }
                     }
                 });
@@ -162,8 +221,7 @@ public class LoginFragment extends Fragment {
 
     private void startQrReader(View v) {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            //Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_qrReaderFragment);
-            Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_coursesFragment);
+            Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_qrReaderFragment);
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
             alertDialog.setMessage("To enable it, go to settings");
