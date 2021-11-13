@@ -33,7 +33,7 @@ import java.util.HashMap;
 public class SignupFragment extends Fragment {
 
     private FirebaseAuth mAuth;
-
+    String accountType = new String("Student");
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,19 +71,19 @@ public class SignupFragment extends Fragment {
             btn.setBackgroundColor(Color.parseColor("#65E0E5"));
             binding.teacherBtn.setBackgroundColor(0);
             binding.adminBtn.setBackgroundColor(0);
-
+            accountType = "Student";
         } else if (btn.equals(binding.teacherBtn)) {
 
             btn.setBackgroundColor(Color.parseColor("#65E0E5"));
             binding.studentBtn.setBackgroundColor(0);
             binding.adminBtn.setBackgroundColor(0);
-
+            accountType = "Teacher";
         } else if (btn.equals(binding.adminBtn)) {
 
             btn.setBackgroundColor(Color.parseColor("#65E0E5"));
             binding.studentBtn.setBackgroundColor(0);
             binding.teacherBtn.setBackgroundColor(0);
-
+            accountType = "Administrator";
         }
     }
 
@@ -102,6 +102,7 @@ public class SignupFragment extends Fragment {
                         hashMap.put("grupa", group);
                         hashMap.put("grupa", faculty);
                         hashMap.put("email", email);
+                        hashMap.put("accountType", accountType);
 
 
 
