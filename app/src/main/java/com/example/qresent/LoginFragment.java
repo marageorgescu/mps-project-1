@@ -199,10 +199,13 @@ public class LoginFragment extends Fragment {
                         } else {
                             // If sign in fails, try to create a new account
 
-                            createAccount(email, password);
+                            /*createAccount(email, password);
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            updateUI(user, view);
+                            updateUI(user, view);*/
+
+                            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_signupFragment);
+
                         }
                     }
                 });

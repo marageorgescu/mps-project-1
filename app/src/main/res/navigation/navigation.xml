@@ -27,7 +27,11 @@
         android:id="@+id/signupFragment"
         android:name="com.example.qresent.SignupFragment"
         android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" />
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signupFragment_to_qrGeneratorFragment"
+            app:destination="@id/qrGeneratorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/qrReaderFragment"
         android:name="com.example.qresent.QrReaderFragment"
@@ -42,5 +46,9 @@
         android:id="@+id/coursesFragment"
         android:name="com.example.qresent.CoursesFragment"
         android:label="fragment_courses"
-        tools:layout="@layout/fragment_courses" />
+        tools:layout="@layout/fragment_courses" >
+        <action
+            android:id="@+id/action_coursesFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

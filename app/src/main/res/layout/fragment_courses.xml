@@ -80,6 +80,7 @@
                 android:layout_weight="0.35"/>
 
             <Button
+                android:id="@+id/logoutBtn"
                 android:layout_width="100dp"
                 android:layout_height="60dp"
                 android:layout_weight="0.3"
