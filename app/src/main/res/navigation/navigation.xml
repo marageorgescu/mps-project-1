@@ -22,6 +22,15 @@
         <action
             android:id="@+id/action_loginFragment_to_coursesFragment"
             app:destination="@id/coursesFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_studentHomeScreenFragment"
+            app:destination="@id/studentHomeScreenFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_teacherHomeScreenFragment"
+            app:destination="@id/teacherHomeScreenFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_adminHomeScreenFragment"
+            app:destination="@id/adminHomeScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -31,6 +40,15 @@
         <action
             android:id="@+id/action_signupFragment_to_qrGeneratorFragment"
             app:destination="@id/qrGeneratorFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_studentHomeScreenFragment"
+            app:destination="@id/studentHomeScreenFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_teacherHomeScreenFragment"
+            app:destination="@id/teacherHomeScreenFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_adminHomeScreenFragment"
+            app:destination="@id/adminHomeScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/qrReaderFragment"
@@ -59,4 +77,46 @@
         android:name="com.example.qresent.EditCourseFragment"
         android:label="fragment_edit_course"
         tools:layout="@layout/fragment_edit_course" />
+    <fragment
+        android:id="@+id/studentHomeScreenFragment"
+        android:name="com.example.qresent.StudentHomeScreenFragment"
+        android:label="fragment_student_home_screen"
+        tools:layout="@layout/fragment_student_home_screen" >
+        <action
+            android:id="@+id/action_studentHomeScreenFragment_to_coursesFragment"
+            app:destination="@id/coursesFragment" />
+        <action
+            android:id="@+id/action_studentHomeScreenFragment_to_qrReaderFragment"
+            app:destination="@id/qrReaderFragment" />
+        <action
+            android:id="@+id/action_studentHomeScreenFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherHomeScreenFragment"
+        android:name="com.example.qresent.TeacherHomeScreenFragment"
+        android:label="fragment_teacher_home_screen"
+        tools:layout="@layout/fragment_teacher_home_screen" >
+        <action
+            android:id="@+id/action_teacherHomeScreenFragment_to_coursesFragment"
+            app:destination="@id/coursesFragment" />
+        <action
+            android:id="@+id/action_teacherHomeScreenFragment_to_qrGeneratorFragment"
+            app:destination="@id/qrGeneratorFragment" />
+        <action
+            android:id="@+id/action_teacherHomeScreenFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminHomeScreenFragment"
+        android:name="com.example.qresent.AdminHomeScreenFragment"
+        android:label="fragment_admin_home_screen"
+        tools:layout="@layout/fragment_admin_home_screen" >
+        <action
+            android:id="@+id/action_adminHomeScreenFragment_to_coursesFragment"
+            app:destination="@id/coursesFragment" />
+        <action
+            android:id="@+id/action_adminHomeScreenFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

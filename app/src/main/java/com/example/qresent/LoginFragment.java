@@ -39,6 +39,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
@@ -50,6 +52,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +70,7 @@ public class LoginFragment extends Fragment {
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     private FragmentLoginBinding binding;
+    FirebaseDatabase database;
 
     private CallbackManager callbackManager;
 
@@ -90,6 +96,7 @@ public class LoginFragment extends Fragment {
                 false
         );
         mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://qresent-926c3-default-rtdb.europe-west1.firebasedatabase.app/");
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
 
@@ -216,7 +223,28 @@ public class LoginFragment extends Fragment {
 
     private void updateUI(FirebaseUser user, View view) {
         if (user != null) {
-            startQrReader(view);
+            //startQrReader(view);
+
+            database = FirebaseDatabase.getInstance("https://qresent-926c3-default-rtdb.europe-west1.firebasedatabase.app/");
+            DatabaseReference myRef = database.getReference("Users");
+            myRef.child(user.getUid()).child("accountType").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+                    String type = dataSnapshot.getValue(String.class);
+                    if (type.equals("Student")) {
+                        Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_studentHomeScreenFragment);
+                    } else if (type.equals("Teacher")) {
+                        Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_teacherHomeScreenFragment);
+                    } else if (type.equals("Administrator")) {
+                        Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_adminHomeScreenFragment);
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

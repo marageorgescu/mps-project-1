@@ -93,14 +93,23 @@ public class SignupFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Navigation.findNavController(v)
-                                .navigate(R.id.action_signupFragment_to_qrGeneratorFragment);
+
+                        if (accountType.equals("Student")) {
+                            Navigation.findNavController(v)
+                                    .navigate(R.id.action_signupFragment_to_studentHomeScreenFragment);
+                        } else if (accountType.equals("Teacher")) {
+                            Navigation.findNavController(v)
+                                    .navigate(R.id.action_signupFragment_to_teacherHomeScreenFragment);
+                        } else if (accountType.equals("Administrator")) {
+                            Navigation.findNavController(v)
+                                    .navigate(R.id.action_signupFragment_to_adminHomeScreenFragment);
+                        }
 
                         HashMap<Object, String> hashMap = new HashMap<>();
                         hashMap.put("uid", mAuth.getCurrentUser().getUid());
                         hashMap.put("name", name);
                         hashMap.put("grupa", group);
-                        hashMap.put("grupa", faculty);
+                        hashMap.put("facultate", faculty);
                         hashMap.put("email", email);
                         hashMap.put("accountType", accountType);
 
