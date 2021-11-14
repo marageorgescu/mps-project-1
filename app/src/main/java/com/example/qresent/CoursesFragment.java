@@ -55,7 +55,9 @@ public class CoursesFragment extends Fragment {
         binding.coursesLL.setOrientation(LinearLayout.VERTICAL);
         RecyclerView scrollCourses = binding.scrollCourses;
         scrollCourses.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        scrollCourses.setAdapter(new RecyclerAdapter(courses, this.getContext()));
+        RecyclerAdapter adapter = new RecyclerAdapter(courses, this.getContext());
+        scrollCourses.setAdapter(adapter);
+
 
 
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {

@@ -102,8 +102,6 @@ public class LoginFragment extends Fragment {
                 String password = Objects.requireNonNull(binding.passwordET.getText()).toString().trim();
                 if (checkValidityEmailAndPassword(email, password)) {
                     firebaseAuthWithEmailAndPassword(email, password, v);
-                    Navigation.findNavController(v)
-                            .navigate(R.id.action_loginFragment_to_qrGeneratorFragment);
                 }
 
 
@@ -224,7 +222,7 @@ public class LoginFragment extends Fragment {
 
     private void startQrReader(View v) {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_qrReaderFragment);
+            Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_coursesFragment);
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
             alertDialog.setMessage("To enable it, go to settings");

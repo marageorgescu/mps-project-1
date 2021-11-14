@@ -50,5 +50,13 @@
         <action
             android:id="@+id/action_coursesFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_coursesFragment_to_editCourseFragment"
+            app:destination="@id/editCourseFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/editCourseFragment"
+        android:name="com.example.qresent.EditCourseFragment"
+        android:label="fragment_edit_course"
+        tools:layout="@layout/fragment_edit_course" />
 </navigation>
