@@ -1,19 +1,15 @@
 package com.example.qresent;
 
 import android.os.Bundle;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+
 import com.example.qresent.databinding.FragmentEditCourseBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,26 +39,17 @@ public class EditCourseFragment extends Fragment {
         courseName.setText(title);
         UpdateDescriptionFromDB(title);
 
-        binding.saveDataBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SendNewDescriptionToDB();
-            }
-        });
+        binding.saveDataBtn.setOnClickListener(view -> SendNewDescriptionToDB());
         return binding.getRoot();
     }
 
-    void UpdateDescriptionFromDB(String title)
-    {
+    void UpdateDescriptionFromDB(String title) {
         DatabaseReference myRef = database.getReference("Courses");
-        myRef.child(title).child("Description").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-            @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue() != null)
-                    binding.descriptionET.setText(dataSnapshot.getValue().toString());
-                else
-                    binding.descriptionET.setText("No description added");
-            }
+        myRef.child(title).child("Description").get().addOnSuccessListener(dataSnapshot -> {
+            if (dataSnapshot.getValue() != null)
+                binding.descriptionET.setText(dataSnapshot.getValue().toString());
+            else
+                binding.descriptionET.setText("No description added");
         });
     }
 
