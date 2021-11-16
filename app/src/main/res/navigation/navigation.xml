@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_studentHomeScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_studentHomeScreenFragment_to_viewCoursesFragment"
+            app:destination="@id/viewCoursesFragment" />
     </fragment>
     <fragment
         android:id="@+id/teacherHomeScreenFragment"
@@ -119,4 +122,21 @@
             android:id="@+id/action_adminHomeScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/viewCoursesFragment"
+        android:name="com.example.qresent.ViewCoursesFragment"
+        android:label="fragment_view_courses"
+        tools:layout="@layout/fragment_view_courses" >
+        <action
+            android:id="@+id/action_viewCoursesFragment_to_viewCourseFragment"
+            app:destination="@id/viewCourseFragment" />
+        <action
+            android:id="@+id/action_viewCoursesFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewCourseFragment"
+        android:name="com.example.qresent.ViewCourseFragment"
+        android:label="fragment_view_course"
+        tools:layout="@layout/fragment_view_course" />
 </navigation>

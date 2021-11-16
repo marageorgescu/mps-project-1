@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".EditCourseFragment">
+    tools:context=".ViewCourseFragment">
 
     <LinearLayout
         android:id="@+id/FEditcourseLL"
@@ -20,41 +20,18 @@
             android:fontFamily="sans-serif-medium"
             android:gravity="center"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/etDescriptionLayout"
+        <TextView
+            android:id="@+id/CourseDescriptionTV"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/descriptionET"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Description"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/saveDataBtn"
-            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:text="SAVE"
-            app:cornerRadius="100dp"
-            android:textSize="18sp"
-            android:backgroundTint="#b50829"
-            android:layout_gravity="center_horizontal"
-            android:paddingLeft="60dp"
-            android:paddingRight="60dp"
-            />
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.4"
+            android:layout_weight="2"
             android:gravity="center|center_vertical"
             android:textSize="50sp" />
 
@@ -65,9 +42,8 @@
             android:src="@drawable/signupart"
             android:scaleType="fitXY"
             />
+
     </LinearLayout>
-
-
 
 
 </layout>

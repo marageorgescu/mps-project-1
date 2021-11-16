@@ -69,7 +69,7 @@ public class StudentHomeScreenFragment extends Fragment {
         binding.gotocoursesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_studentHomeScreenFragment_to_coursesFragment);
+                Navigation.findNavController(v).navigate(R.id.action_studentHomeScreenFragment_to_viewCoursesFragment);
             }
         });
 

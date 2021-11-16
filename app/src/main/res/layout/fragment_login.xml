@@ -86,34 +86,35 @@
             android:layout_height="0dp"
             android:layout_weight="0.5"
             android:orientation="horizontal"
+            android:layout_marginLeft="7dp"
             android:weightSum="5">
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"/>
+                android:layout_weight="0.5" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/signInBtn"
-                android:layout_width="0dp"
+                android:layout_width="87dp"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="2"
-                android:text="Sign In"
-                app:cornerRadius="100dp"
-                android:textSize="18sp"
                 android:backgroundTint="#b50829"
-                android:layout_gravity="center_horizontal"/>
+                android:text="Sign In"
+                android:textSize="18sp"
+                app:cornerRadius="100dp" />
 
             <ImageButton
                 android:id="@+id/googleSignInBtn"
-                android:layout_width="0dp"
+                android:layout_width="48dp"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:src="@drawable/google"
-                android:scaleType="fitCenter"
-                android:background="@drawable/roundcorner"
                 android:adjustViewBounds="true"
-                android:layout_gravity="center_horizontal"/>
+                android:background="@drawable/roundcorner"
+                android:scaleType="fitCenter"
+                android:src="@drawable/google" />
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/facebookSignInBtn"
@@ -122,11 +123,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"/>
 
         </LinearLayout>
 
