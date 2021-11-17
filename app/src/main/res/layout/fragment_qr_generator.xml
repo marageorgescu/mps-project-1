@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".QrGeneratorFragment">
 
 
@@ -28,10 +28,11 @@
             android:layout_marginEnd="20dp"
             android:autofillHints=""
             android:hint="Enter generator string"
+            android:theme="@style/EditTextTheme"
             android:inputType="text" />
 
         <!--Button for creating a QR code-->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/idBtnGenerateQR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +40,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
-            android:text="Generate QR" />
+            android:text="Generate QR"
+            app:cornerRadius="100dp"/>
     </RelativeLayout>
 
 
