@@ -33,6 +33,7 @@ import java.util.HashMap;
 public class SignupFragment extends Fragment {
 
     private FirebaseAuth mAuth;
+
     String accountType = new String("Student");
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
