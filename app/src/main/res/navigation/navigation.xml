@@ -125,7 +125,18 @@
 
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.example.qresent.CalendarFragment"
+        android:name="com.example.qresent.calendar.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar"></fragment>
+        tools:layout="@layout/fragment_calendar">
+
+        <action
+            android:id="@+id/action_calendarFragment_to_scheduleCoursesFragment"
+            app:destination="@id/scheduleCoursesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scheduleCoursesFragment"
+        android:name="com.example.qresent.schedule.ScheduleCoursesFragment"
+        android:label="fragment_schedule_courses"
+        tools:layout="@layout/fragment_schedule_courses" />
 </navigation>

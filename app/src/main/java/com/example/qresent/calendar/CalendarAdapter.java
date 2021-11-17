@@ -1,4 +1,4 @@
-package com.example.qresent;
+package com.example.qresent.calendar;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.qresent.R;
 
 import java.util.ArrayList;
 
@@ -39,6 +41,6 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     }
 
     public interface OnItemListener {
-        void onItemClick(int position, String dayText);
+        void onItemClick(View v, int position, String dayText);
     }
 }

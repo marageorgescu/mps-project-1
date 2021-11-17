@@ -1,4 +1,4 @@
-package com.example.qresent;
+package com.example.qresent.calendar;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -6,14 +6,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.qresent.R;
 import com.example.qresent.databinding.FragmentCalendarBinding;
 
 import java.time.LocalDate;
@@ -27,6 +29,8 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
+    private Button previousMonthButton;
+    private Button nextMonthButton;
 
 
     @Override
@@ -43,12 +47,17 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         selectedDate = LocalDate.now();
         setMonthView();
 
+        previousMonthButton.setOnClickListener(this::previousMonthAction);
+        nextMonthButton.setOnClickListener(this::nextMonthAction);
+
         return binding.getRoot();
     }
 
     private void initWidgets() {
         calendarRecyclerView = binding.calendarRecyclerView;
         monthYearText = binding.monthYearTV;
+        previousMonthButton = binding.previousMonthButton;
+        nextMonthButton = binding.nextMonthButton;
     }
 
     private void setMonthView() {
@@ -96,10 +105,10 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     }
 
     @Override
-    public void onItemClick(int position, String dayText) {
+    public void onItemClick(View v, int position, String dayText) {
         if (!dayText.equals("")) {
-            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            Navigation.findNavController(v).navigate(R.id.action_calendarFragment_to_scheduleCoursesFragment);
         }
     }
+
 }
