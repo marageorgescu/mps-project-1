@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AddToCourseFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="5"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Add to Course"
+            android:textSize="50sp"
+            android:gravity="center"/>
+
+        <Spinner
+            android:id="@+id/teacherSpinner"
+            android:layout_width="400dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"/>
+
+        <Spinner
+            android:id="@+id/courseSpinner"
+            android:layout_width="400dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"/>
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:orientation="horizontal"
+            android:checkedButton="@id/teacherRadio">
+            <RadioButton android:id="@+id/teacherRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="Teacher"/>
+            <RadioButton android:id="@+id/laborantRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Lab Assistant"/>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/addteacherBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:text="Save"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</layout>

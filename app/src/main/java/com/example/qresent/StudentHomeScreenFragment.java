@@ -76,7 +76,7 @@ public class StudentHomeScreenFragment extends Fragment {
         binding.gotoScheduleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Navigation.findNavController(v).navigate(R.id.action_studentHomeScreenFragment_to_calendarFragment);
             }
         });
 
@@ -94,6 +94,7 @@ public class StudentHomeScreenFragment extends Fragment {
                 checkIfUserIsLoggedIn(binding, v);
             }
         });
+
 
         return binding.getRoot();
     }

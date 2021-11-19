@@ -94,6 +94,9 @@
         <action
             android:id="@+id/action_studentHomeScreenFragment_to_viewCoursesFragment"
             app:destination="@id/viewCoursesFragment" />
+        <action
+            android:id="@+id/action_studentHomeScreenFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
     </fragment>
     <fragment
         android:id="@+id/teacherHomeScreenFragment"
@@ -109,6 +112,12 @@
         <action
             android:id="@+id/action_teacherHomeScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_teacherHomeScreenFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_teacherHomeScreenFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
     </fragment>
     <fragment
         android:id="@+id/adminHomeScreenFragment"
@@ -121,6 +130,12 @@
         <action
             android:id="@+id/action_adminHomeScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_adminHomeScreenFragment_to_addToCourseFragment"
+            app:destination="@id/addToCourseFragment" />
+        <action
+            android:id="@+id/action_adminHomeScreenFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
     </fragment>
     <fragment
         android:id="@+id/viewCoursesFragment"
@@ -139,4 +154,28 @@
         android:name="com.example.qresent.ViewCourseFragment"
         android:label="fragment_view_course"
         tools:layout="@layout/fragment_view_course" />
+    <fragment
+        android:id="@+id/addToCourseFragment"
+        android:name="com.example.qresent.AddToCourseFragment"
+        android:label="fragment_add_to_course"
+        tools:layout="@layout/fragment_add_to_course" />
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.qresent.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.qresent.calendar.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_scheduleCoursesFragment"
+            app:destination="@id/scheduleCoursesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scheduleCoursesFragment"
+        android:name="com.example.qresent.schedule.ScheduleCoursesFragment"
+        android:label="fragment_schedule_courses"
+        tools:layout="@layout/fragment_schedule_courses" />
 </navigation>

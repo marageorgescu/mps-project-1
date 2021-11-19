@@ -75,7 +75,7 @@ public class TeacherHomeScreenFragment extends Fragment {
         binding.gotoScheduleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Navigation.findNavController(v).navigate(R.id.action_teacherHomeScreenFragment_to_calendarFragment);
             }
         });
 
@@ -89,9 +89,11 @@ public class TeacherHomeScreenFragment extends Fragment {
         binding.gotostatisticsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Navigation.findNavController(v).navigate(R.id.action_teacherHomeScreenFragment_to_statisticsFragment);
             }
         });
+
+
 
         binding.gotologoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

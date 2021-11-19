@@ -3,17 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/calendar_cell.xml" value="0.23233695652173914" />
         <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/course_row.xml" value="0.22916666666666666" />
+        <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_add_to_course.xml" value="0.23233695652173914" />
         <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_admin_home_screen.xml" value="0.22418478260869565" />
+        <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_calendar.xml" value="0.23233695652173914" />
         <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_courses.xml" value="0.151268115942029" />
         <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_edit_course.xml" value="0.15353260869565216" />
         <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_login.xml" value="0.151268115942029" />
         <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_qr_reader.xml" value="0.22418478260869565" />
+        <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_schedule_courses.xml" value="0.23233695652173914" />
         <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_signup.xml" value="0.22418478260869565" />
+        <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_statistics.xml" value="0.23233695652173914" />
         <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_student_home_screen.xml" value="0.22916666666666666" />
         <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_teacher_home_screen.xml" value="0.22418478260869565" />
         <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_view_course.xml" value="0.22916666666666666" />
         <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/fragment_view_courses.xml" value="0.22418478260869565" />
+        <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/schedule_courses_row.xml" value="0.23233695652173914" />
         <entry key="..\:/CursuriFacultate/MPS/mpsP1/mps-project-1/app/src/main/res/layout/view_course_row.xml" value="0.22916666666666666" />
       </map>
     </option>

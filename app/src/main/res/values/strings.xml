@@ -6,4 +6,6 @@
     <string name="facebook_app_id">1748905678621824</string>
     <string name="fb_login_protocol_scheme">fb1748905678621824</string>
     <string name="facebook_client_token">WD8HgMA5QjnnHxmpN6XnutrIysc=</string>
+    <string name="back"><![CDATA[<-]]></string>
+    <string name="forward"><![CDATA[->]]></string>
 </resources>

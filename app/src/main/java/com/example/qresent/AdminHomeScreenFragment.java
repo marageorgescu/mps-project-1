@@ -75,7 +75,14 @@ public class AdminHomeScreenFragment extends Fragment {
         binding.gotostatisticsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_adminHomeScreenFragment_to_statisticsFragment);
+            }
+        });
 
+        binding.addtocourseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_adminHomeScreenFragment_to_addToCourseFragment);
             }
         });
 
