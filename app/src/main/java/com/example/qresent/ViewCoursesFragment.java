@@ -85,7 +85,7 @@ public class ViewCoursesFragment extends Fragment {
                                 String course = ((DataSnapshot)iterator.next()).getKey().toString();
                                 coursesList.add(course);
                             }
-                            RecyclerAdapter adapter = new RecyclerAdapter(coursesList, getActivity());
+                            RecyclerAdapterViewCourse adapter = new RecyclerAdapterViewCourse(coursesList, getActivity());
                             scrollCourses.setAdapter(adapter);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
