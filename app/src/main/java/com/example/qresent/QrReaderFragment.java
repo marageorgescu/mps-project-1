@@ -52,7 +52,7 @@ public class QrReaderFragment extends Fragment {
     FirebaseDatabase database;
     private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 0;
     private CodeScanner mCodeScanner;
-    final long maxDifference = 90000; //1.5 minutes
+    final long maxDifference = 70000; //1.5 minutes
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

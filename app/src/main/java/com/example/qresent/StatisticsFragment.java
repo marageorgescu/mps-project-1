@@ -50,6 +50,8 @@ public class StatisticsFragment extends Fragment {
     };
     private ArrayList<Integer> stats = new ArrayList<Integer>();
     private ArrayList<String> courses = new ArrayList<String>();
+    int nrCourses;
+    RecyclerView scrollStats;
     FirebaseDatabase database;
 
     @Override
@@ -64,7 +66,7 @@ public class StatisticsFragment extends Fragment {
         );
 
         binding.statsLL.setOrientation(LinearLayout.VERTICAL);
-        RecyclerView scrollStats = binding.scrollStats;
+        scrollStats = binding.scrollStats;
         scrollStats.setLayoutManager(new LinearLayoutManager(this.getContext()));
         initCoursesArray(scrollStats);
         initspinnerfooter();
@@ -119,12 +121,22 @@ public class StatisticsFragment extends Fragment {
                                     }
                                 }
 
+                                nrCourses = courses.size();
+                                DatabaseReference reference = database.getReference("Attendance");
+
                                 for(String course: courses) {
-                                    stats.add(10);
+                                    reference.child(course).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DataSnapshot dataSnapshot) {
+                                            Log.i("count",course + " " + String.valueOf(dataSnapshot.getChildrenCount()));
+                                            waitForRetrieveData();
+                                            stats.add((int) dataSnapshot.getChildrenCount());
+                                        }
+                                    });
+
                                 }
 
-                                RecyclerViewStatistics adapter = new RecyclerViewStatistics(stats, courses, getActivity());
-                                scrollStats.setAdapter(adapter);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -148,6 +160,16 @@ public class StatisticsFragment extends Fragment {
         });
     }
 
+    void waitForRetrieveData()
+    {
+        nrCourses--;
+        if(nrCourses == 0)
+        {
+            RecyclerViewStatistics adapter = new RecyclerViewStatistics(stats, courses, getActivity());
+            scrollStats.setAdapter(adapter);
+        }
+
+    }
     private void initspinnerfooter() {
 
         ArrayList<String> courseList = new ArrayList<>();
