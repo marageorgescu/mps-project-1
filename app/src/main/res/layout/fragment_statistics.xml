@@ -19,10 +19,33 @@
             android:gravity="center"/>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <Spinner
+                android:id="@+id/attendanceSpinner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"/>
+
+            <Button
+                android:id="@+id/exportBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Export"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/statsLL"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:orientation="vertical"
             android:weightSum="10">
 
@@ -31,14 +54,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_weight="10"
-                android:scrollbars="vertical"
-                >
-
+                android:scrollbars="vertical">
             </androidx.recyclerview.widget.RecyclerView>
-
         </LinearLayout>
-
-
 
     </LinearLayout>
 
