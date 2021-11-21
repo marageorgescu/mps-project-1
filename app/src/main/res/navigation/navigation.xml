@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_loginFragment_to_adminHomeScreenFragment"
             app:destination="@id/adminHomeScreenFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -54,7 +57,11 @@
         android:id="@+id/qrReaderFragment"
         android:name="com.example.qresent.QrReaderFragment"
         android:label="fragment_qr_reader"
-        tools:layout="@layout/fragment_qr_reader" />
+        tools:layout="@layout/fragment_qr_reader" >
+        <action
+            android:id="@+id/action_qrReaderFragment_to_studentHomeScreenFragment"
+            app:destination="@id/studentHomeScreenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/qrGeneratorFragment"
         android:name="com.example.qresent.QrGeneratorFragment"
@@ -81,7 +88,7 @@
         android:id="@+id/studentHomeScreenFragment"
         android:name="com.example.qresent.StudentHomeScreenFragment"
         android:label="fragment_student_home_screen"
-        tools:layout="@layout/fragment_student_home_screen">
+        tools:layout="@layout/fragment_student_home_screen" >
         <action
             android:id="@+id/action_studentHomeScreenFragment_to_coursesFragment"
             app:destination="@id/coursesFragment" />
@@ -91,6 +98,9 @@
         <action
             android:id="@+id/action_studentHomeScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_studentHomeScreenFragment_to_viewCoursesFragment"
+            app:destination="@id/viewCoursesFragment" />
         <action
             android:id="@+id/action_studentHomeScreenFragment_to_calendarFragment"
             app:destination="@id/calendarFragment" />
@@ -109,34 +119,83 @@
         <action
             android:id="@+id/action_teacherHomeScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_teacherHomeScreenFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_teacherHomeScreenFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
     </fragment>
     <fragment
         android:id="@+id/adminHomeScreenFragment"
         android:name="com.example.qresent.AdminHomeScreenFragment"
         android:label="fragment_admin_home_screen"
-        tools:layout="@layout/fragment_admin_home_screen">
+        tools:layout="@layout/fragment_admin_home_screen" >
         <action
             android:id="@+id/action_adminHomeScreenFragment_to_coursesFragment"
             app:destination="@id/coursesFragment" />
         <action
             android:id="@+id/action_adminHomeScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_adminHomeScreenFragment_to_addToCourseFragment"
+            app:destination="@id/addToCourseFragment" />
+        <action
+            android:id="@+id/action_adminHomeScreenFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_adminHomeScreenFragment_to_addStudentToCourseFragment"
+            app:destination="@id/addStudentToCourseFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/viewCoursesFragment"
+        android:name="com.example.qresent.ViewCoursesFragment"
+        android:label="fragment_view_courses"
+        tools:layout="@layout/fragment_view_courses" >
+        <action
+            android:id="@+id/action_viewCoursesFragment_to_viewCourseFragment"
+            app:destination="@id/viewCourseFragment" />
+        <action
+            android:id="@+id/action_viewCoursesFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewCourseFragment"
+        android:name="com.example.qresent.ViewCourseFragment"
+        android:label="fragment_view_course"
+        tools:layout="@layout/fragment_view_course" />
+    <fragment
+        android:id="@+id/addToCourseFragment"
+        android:name="com.example.qresent.AddToCourseFragment"
+        android:label="fragment_add_to_course"
+        tools:layout="@layout/fragment_add_to_course" />
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.qresent.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.example.qresent.calendar.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar">
-
+        tools:layout="@layout/fragment_calendar" >
         <action
             android:id="@+id/action_calendarFragment_to_scheduleCoursesFragment"
             app:destination="@id/scheduleCoursesFragment" />
     </fragment>
-
     <fragment
         android:id="@+id/scheduleCoursesFragment"
         android:name="com.example.qresent.schedule.ScheduleCoursesFragment"
         android:label="fragment_schedule_courses"
         tools:layout="@layout/fragment_schedule_courses" />
+    <fragment
+        android:id="@+id/addStudentToCourseFragment"
+        android:name="com.example.qresent.AddStudentToCourseFragment"
+        android:label="fragment_add_student_to_course"
+        tools:layout="@layout/fragment_add_student_to_course" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.qresent.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
 </navigation>

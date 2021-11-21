@@ -52,5 +52,5 @@ dependencies {
     implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
     implementation 'com.google.zxing:core:3.3.3'
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
-
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
 }
