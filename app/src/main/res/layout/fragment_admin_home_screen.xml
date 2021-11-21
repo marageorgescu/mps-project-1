@@ -24,7 +24,7 @@
             android:id="@+id/infoTv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="0.5"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/gotocoursesBtn"
@@ -41,6 +41,15 @@
             android:layout_height="0dp"
             android:layout_weight="0.5"
             android:text="Go to Statistics"
+            android:layout_gravity="center"
+            app:cornerRadius="100dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addstudenttocourseBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:text="Add Student to Course"
             android:layout_gravity="center"
             app:cornerRadius="100dp"/>
 

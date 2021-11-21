@@ -136,6 +136,9 @@
         <action
             android:id="@+id/action_adminHomeScreenFragment_to_statisticsFragment"
             app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_adminHomeScreenFragment_to_addStudentToCourseFragment"
+            app:destination="@id/addStudentToCourseFragment" />
     </fragment>
     <fragment
         android:id="@+id/viewCoursesFragment"
@@ -178,4 +181,9 @@
         android:name="com.example.qresent.schedule.ScheduleCoursesFragment"
         android:label="fragment_schedule_courses"
         tools:layout="@layout/fragment_schedule_courses" />
+    <fragment
+        android:id="@+id/addStudentToCourseFragment"
+        android:name="com.example.qresent.AddStudentToCourseFragment"
+        android:label="fragment_add_student_to_course"
+        tools:layout="@layout/fragment_add_student_to_course" />
 </navigation>

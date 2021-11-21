@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AddToCourseFragment">
 
     <LinearLayout
@@ -14,9 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center|center_vertical"
             android:text="Add to Course"
-            android:textSize="50sp"
-            android:gravity="center"/>
+            android:textSize="50sp"/>
 
         <Spinner
             android:id="@+id/teacherSpinner"
@@ -48,13 +50,29 @@
                 android:text="Lab Assistant"/>
         </RadioGroup>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/addteacherBtn"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="0.5"
             android:text="Save"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            app:cornerRadius="100dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.9"
+            android:gravity="center|center_vertical"
+            android:textSize="50sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.15"
+            android:src="@drawable/signupart"
+            android:scaleType="fitXY"
+            />
 
     </LinearLayout>
 

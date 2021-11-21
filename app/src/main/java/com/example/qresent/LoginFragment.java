@@ -74,6 +74,8 @@ public class LoginFragment extends Fragment {
 
     private CallbackManager callbackManager;
 
+    View view_global;
+
 
     @Override
     public void onStart() {
@@ -117,10 +119,13 @@ public class LoginFragment extends Fragment {
 
         createRequest();
 
-        binding.googleSignInBtn.setOnClickListener(
-                v -> signIn()
-        );
-
+        binding.googleSignInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                view_global = v;
+                signIn();
+            }
+        });
 
         binding.facebookSignInBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -136,7 +141,7 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onError(@NonNull FacebookException e) {
-
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -223,7 +228,6 @@ public class LoginFragment extends Fragment {
 
     private void updateUI(FirebaseUser user, View view) {
         if (user != null) {
-            //startQrReader(view);
 
             database = FirebaseDatabase.getInstance("https://qresent-926c3-default-rtdb.europe-west1.firebasedatabase.app/");
             DatabaseReference myRef = database.getReference("Users");
@@ -248,24 +252,6 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    private void startQrReader(View v) {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_coursesFragment);
-        } else {
-            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-            alertDialog.setMessage("To enable it, go to settings");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    (dialog, which) -> {
-                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
-                        intent.setData(uri);
-                        startActivity(intent);
-                        dialog.dismiss();
-                    });
-            alertDialog.show();
-        }
-    }
-
     private  boolean checkAndRequestPermissions() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA},
@@ -283,7 +269,7 @@ public class LoginFragment extends Fragment {
                 .build();
 
         // Build a GoogleSignClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
     }
 
     private void signIn() {
@@ -318,16 +304,17 @@ public class LoginFragment extends Fragment {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithCredential:success");
+                        Log.i(TAG, "signInWithCredential:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(getContext(), "signInWithCredential:success", Toast.LENGTH_SHORT).show();
-                        updateUI(user, null);
+                        Toast.makeText(getActivity(), "signInWithCredential:success", Toast.LENGTH_SHORT).show();
+                        //updateUI(user, null);
+                        Navigation.findNavController(view_global).navigate(R.id.action_loginFragment_to_studentHomeScreenFragment);
                     } else {
                         // If sign in fails, display a message to the user.
-                        Log.w(TAG, "signInWithCredential:failure", task.getException());
-                        Toast.makeText(getContext(), "signInWithCredential:FAIL", Toast.LENGTH_SHORT).show();
+                        Log.i(TAG, "signInWithCredential:failure", task.getException());
+                        Toast.makeText(getActivity(), "signInWithCredential:FAIL", Toast.LENGTH_SHORT).show();
 
-                        updateUI(null, null);
+                        //updateUI(null, null);
                     }
                 });
     }

@@ -16,6 +16,8 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.qresent.databinding.FragmentQrReaderBinding;
 import com.example.qresent.databinding.FragmentSignupBinding;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,9 +36,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.Result;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class QrReaderFragment extends Fragment {
@@ -44,6 +51,7 @@ public class QrReaderFragment extends Fragment {
     FirebaseDatabase database;
     private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 0;
     private CodeScanner mCodeScanner;
+    final long maxDifference = 90000; //1.5 minutes
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,8 +76,9 @@ public class QrReaderFragment extends Fragment {
                 /*while(result.getText().equals("")) {
 
                 }*/
-                Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
-                PutUserAttendanceOnDB(result.getText().toString());
+                //Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
+                String[] splits = result.getText().toString().split(":");
+                PutUserAttendanceOnDB(splits[0], splits[1]);
             }
         }));
         scannerView.setOnClickListener(view -> mCodeScanner.startPreview());
@@ -79,28 +88,56 @@ public class QrReaderFragment extends Fragment {
         return binding.getRoot();
     }
 
-    void PutUserAttendanceOnDB(String course)
+    void PutUserAttendanceOnDB(String course, String hash)
     {
-        DatabaseReference myRef = database.getReference("Attendance");
-        myRef.child(course).child(mAuth.getCurrentUser().getUid()).setValue(Calendar.getInstance().getTime().toString())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                //Toast.makeText(getActivity(), "Introducere", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    void GetUserNameFromDB(String course)
-    {
-        DatabaseReference myRef = database.getReference("Users");
-        myRef.child(mAuth.getCurrentUser().getUid()).child("name").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        DatabaseReference ref = database.getReference("CourseQRs");
+        ref.child(course).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue() != null)
-                    PutUserAttendanceOnDB(course);
-                else
-                    Toast.makeText(getActivity(), "Kaka", Toast.LENGTH_SHORT).show();
+                String val = dataSnapshot.getValue().toString();
+                if (val.equals(hash)) {
+                    DatabaseReference reference = database.getReference("CourseTimestamps");
+                    reference.child(course).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot) {
+                            Calendar cal = Calendar.getInstance();
+                            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+                            try {
+                                Date dateVal = sdf.parse(dataSnapshot.getValue().toString());
+                                //Toast.makeText(getActivity(), dateVal.toString(), Toast.LENGTH_SHORT).show();
+                                Date nowDate = Calendar.getInstance().getTime();
+                                long difference = Math.abs(nowDate.getTime() - dateVal.getTime());
+                                //Toast.makeText(getActivity(), String.valueOf(difference), Toast.LENGTH_SHORT).show();
+                                if (difference <= maxDifference) {
+                                    DatabaseReference myRef = database.getReference("Attendance");
+                                    myRef.child(course).child(mAuth.getCurrentUser().getUid()).setValue(nowDate.toString())
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    //Toast.makeText(getActivity(), "Introducere", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                } else {
+                                    Toast.makeText(getActivity(), "Codul a expirat. Absenta!", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(getActivity(), "Nu mai frauda, cumetre!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

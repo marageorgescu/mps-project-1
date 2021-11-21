@@ -56,7 +56,7 @@ public class TeacherHomeScreenFragment extends Fragment {
                 String group = ((DataSnapshot)it.next()).getValue().toString();
                 String name = ((DataSnapshot)it.next()).getValue().toString();
 
-                binding.infoTv.setText(accountType + "\nName: " + name + "\nEmail: " + email + "\nFaculty: " + faculty + "\nGroup: " + group);
+                binding.infoTv.setText(accountType + "\nName: " + name + "\nEmail: " + email + "\nFaculty: " + faculty);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

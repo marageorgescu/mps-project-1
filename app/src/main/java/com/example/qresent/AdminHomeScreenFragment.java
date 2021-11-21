@@ -56,7 +56,7 @@ public class AdminHomeScreenFragment extends Fragment {
                 String group = ((DataSnapshot)it.next()).getValue().toString();
                 String name = ((DataSnapshot)it.next()).getValue().toString();
 
-                binding.infoTv.setText(accountType + "\nName: " + name + "\nEmail: " + email + "\nFaculty: " + faculty + "\nGroup: " + group);
+                binding.infoTv.setText(accountType + "\nName: " + name + "\nEmail: " + email + "\nFaculty: " + faculty);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -76,6 +76,13 @@ public class AdminHomeScreenFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.action_adminHomeScreenFragment_to_statisticsFragment);
+            }
+        });
+
+        binding.addstudenttocourseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_adminHomeScreenFragment_to_addStudentToCourseFragment);
             }
         });
 

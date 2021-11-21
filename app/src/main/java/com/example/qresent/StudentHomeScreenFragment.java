@@ -1,12 +1,19 @@
 package com.example.qresent;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +90,8 @@ public class StudentHomeScreenFragment extends Fragment {
         binding.gotoscanqrBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_studentHomeScreenFragment_to_qrReaderFragment);
+                //Navigation.findNavController(v).navigate(R.id.action_studentHomeScreenFragment_to_qrReaderFragment);
+                startQrReader(v);
             }
         });
 
@@ -105,6 +113,24 @@ public class StudentHomeScreenFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_studentHomeScreenFragment_to_loginFragment);
         } else {
 
+        }
+    }
+
+    private void startQrReader(View v) {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            Navigation.findNavController(v).navigate(R.id.action_studentHomeScreenFragment_to_qrReaderFragment);
+        } else {
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+            alertDialog.setMessage("To enable it, go to settings");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    (dialog, which) -> {
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
+                        intent.setData(uri);
+                        startActivity(intent);
+                        dialog.dismiss();
+                    });
+            alertDialog.show();
         }
     }
 }

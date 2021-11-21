@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -23,7 +24,13 @@ import android.widget.Toast;
 
 import com.example.qresent.databinding.FragmentQrGeneratorBinding;
 import com.example.qresent.databinding.FragmentQrReaderBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.WriterException;
+
+import java.util.Calendar;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
@@ -35,6 +42,7 @@ public class QrGeneratorFragment extends Fragment {
     private Button generateQrBtn;
     Bitmap bitmap;
     QRGEncoder qrgEncoder;
+    FirebaseDatabase database;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,16 +88,43 @@ public class QrGeneratorFragment extends Fragment {
 
                     // generating dimension from width and height.
                     int dimen = width < height ? width : height;
-                    dimen = dimen * 3 / 4;
+                    final int dimen1 = dimen * 3 / 4;
 
                     // setting this dimensions inside our qr code
                     // encoder to generate our qr code.
-                    qrgEncoder = new QRGEncoder(dataEdt.getText().toString(), null, QRGContents.Type.TEXT, dimen);
-                    // getting our qrcode in the form of bitmap.
-                    bitmap = qrgEncoder.getBitmap();
-                    // the bitmap is set inside our image
-                    // view using .setimagebitmap method.
-                    qrCodeIV.setImageBitmap(bitmap);
+
+                    String[] splits = dataEdt.getText().toString().split(":");
+                    database = FirebaseDatabase.getInstance("https://qresent-926c3-default-rtdb.europe-west1.firebasedatabase.app/");
+                    DatabaseReference myRef = database.getReference("CourseQRs");
+                    myRef.child(splits[0]).setValue(splits[1]).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            DatabaseReference ref = database.getReference("CourseTimestamps");
+                            ref.child(splits[0]).setValue(Calendar.getInstance().getTime().toString())
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            qrgEncoder = new QRGEncoder(dataEdt.getText().toString(), null, QRGContents.Type.TEXT, dimen1);
+                                            // getting our qrcode in the form of bitmap.
+                                            bitmap = qrgEncoder.getBitmap();
+                                            // the bitmap is set inside our image
+                                            // view using .setimagebitmap method.
+                                            qrCodeIV.setImageBitmap(bitmap);
+                                            dataEdt.setText("");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                            });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
 
             }
