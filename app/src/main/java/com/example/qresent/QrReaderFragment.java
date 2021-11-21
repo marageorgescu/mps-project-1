@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -114,7 +115,8 @@ public class QrReaderFragment extends Fragment {
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
-                                                    //Toast.makeText(getActivity(), "Introducere", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getActivity(), "Prezenta confirmata", Toast.LENGTH_SHORT).show();
+                                                    Navigation.findNavController(getView()).navigate(R.id.action_qrReaderFragment_to_studentHomeScreenFragment);
                                                 }
                                             });
                                 } else {

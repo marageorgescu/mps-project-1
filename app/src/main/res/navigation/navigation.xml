@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_loginFragment_to_adminHomeScreenFragment"
             app:destination="@id/adminHomeScreenFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -54,7 +57,11 @@
         android:id="@+id/qrReaderFragment"
         android:name="com.example.qresent.QrReaderFragment"
         android:label="fragment_qr_reader"
-        tools:layout="@layout/fragment_qr_reader" />
+        tools:layout="@layout/fragment_qr_reader" >
+        <action
+            android:id="@+id/action_qrReaderFragment_to_studentHomeScreenFragment"
+            app:destination="@id/studentHomeScreenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/qrGeneratorFragment"
         android:name="com.example.qresent.QrGeneratorFragment"
@@ -186,4 +193,9 @@
         android:name="com.example.qresent.AddStudentToCourseFragment"
         android:label="fragment_add_student_to_course"
         tools:layout="@layout/fragment_add_student_to_course" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.qresent.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
 </navigation>

@@ -103,6 +103,12 @@ public class LoginFragment extends Fragment {
         callbackManager = CallbackManager.Factory.create();
 
         checkAndRequestPermissions();
+        binding.forgotpasswordTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_forgotPasswordFragment);
+            }
+        });
         binding.signUpTV.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_signupFragment));
         binding.signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
