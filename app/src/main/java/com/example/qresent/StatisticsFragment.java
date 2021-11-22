@@ -1,33 +1,39 @@
 package com.example.qresent;
 
-import android.icu.text.Edits;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qresent.databinding.FragmentStatisticsBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.opencsv.CSVWriter;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,9 +41,10 @@ import java.util.Iterator;
 
 public class StatisticsFragment extends Fragment {
 
+    private static final int PERMISSIONS_REQUEST_WRITE_STORAGE = 3;
     FragmentStatisticsBinding binding;
 
-    private HashMap<String, String> abrevieri = new HashMap<String, String>() {
+    private final HashMap<String, String> abrevieri = new HashMap<String, String>() {
         {
             put("Integrarea sistemelor informatice", "isi");
             put("Managementul proiectelor software", "mps");
@@ -48,11 +55,14 @@ public class StatisticsFragment extends Fragment {
             put("E-commerce", "ecomm");
         }
     };
-    private ArrayList<Integer> stats = new ArrayList<Integer>();
-    private ArrayList<String> courses = new ArrayList<String>();
+    private final File filePath = new File(Environment.getExternalStorageDirectory() + "/Demo.xls");
+    private final ArrayList<Integer> stats = new ArrayList<Integer>();
+    private final ArrayList<String> courses = new ArrayList<String>();
     int nrCourses;
     RecyclerView scrollStats;
     FirebaseDatabase database;
+    private Button exportButton;
+    private Spinner spinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,11 +75,106 @@ public class StatisticsFragment extends Fragment {
                 false
         );
 
+        checkAndRequestPermissions();
+
+//        if (Build.VERSION.SDK_INT >= 30){
+//            if (!Environment.isExternalStorageManager()){
+//                Intent getpermission = new Intent();
+//                getpermission.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+//                startActivity(getpermission);
+//            }
+//        }
+
         binding.statsLL.setOrientation(LinearLayout.VERTICAL);
         scrollStats = binding.scrollStats;
         scrollStats.setLayoutManager(new LinearLayoutManager(this.getContext()));
         initCoursesArray(scrollStats);
         initspinnerfooter();
+
+        binding.exportBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        database = FirebaseDatabase.getInstance("https://qresent-926c3-default-rtdb.europe-west1.firebasedatabase.app/");
+                        DatabaseReference attendanceRef = database.getReference("Attendance");
+                        DatabaseReference usersRef = database.getReference("Users");
+                        String selectedCourse = binding.attendanceSpinner.getSelectedItem().toString();
+                        ArrayList<String[]> studentsData = new ArrayList<>();
+                        final CSVWriter[] writer = {null};
+
+                        attendanceRef.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                            @Override
+                            public void onSuccess(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.hasChild(selectedCourse)) {
+                                    if (dataSnapshot.child(selectedCourse).hasChildren()) {
+                                        Iterator iterator = dataSnapshot.child(selectedCourse).getChildren().iterator();
+                                        int usersSize = Math.toIntExact(dataSnapshot.child(selectedCourse).getChildrenCount());
+
+                                        while (iterator.hasNext()) {
+                                            String encondingName = ((DataSnapshot) iterator.next()).getKey();
+                                            final String[] name = {""};
+                                            final String[] grupa = {""};
+                                            final String[] facultate = {""};
+                                            final String[] email = {""};
+
+                                            usersRef.child(encondingName).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                                @Override
+                                                public void onSuccess(DataSnapshot usersDataSnapshot) {
+
+                                                    for (DataSnapshot item_snapshot : usersDataSnapshot.getChildren()) {
+
+                                                        if (item_snapshot.getKey().equals("name")) {
+                                                            name[0] = item_snapshot.getValue().toString();
+                                                            String[] tempData = {name[0], facultate[0], grupa[0], email[0]};
+                                                            if (studentsData.size() < usersSize) {
+                                                                studentsData.add(tempData);
+                                                            }
+
+                                                            if (studentsData.size() == usersSize) {
+                                                                String baseDir = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
+                                                                String fileName = "AnalysisData.csv";
+                                                                String filePath = baseDir + File.separator + fileName;
+
+                                                                try {
+                                                                    writer[0] = new CSVWriter(new FileWriter(filePath, true));
+                                                                } catch (IOException e) {
+                                                                    e.printStackTrace();
+                                                                }
+                                                                String[] data = {"Name", "Faculty", "Group", "Email"};
+                                                                writer[0].writeNext(data);
+                                                                for (String[] tempString : studentsData) {
+                                                                    Toast.makeText(getContext(), Arrays.toString(tempString), Toast.LENGTH_SHORT).show();
+                                                                    writer[0].writeNext(tempString);
+                                                                }
+
+                                                                try {
+                                                                    writer[0].close();
+                                                                } catch (IOException e) {
+                                                                    e.printStackTrace();
+                                                                }
+                                                            }
+                                                        }
+
+                                                        if (item_snapshot.getKey().equals("grupa")) {
+                                                            grupa[0] = item_snapshot.getValue().toString();
+                                                        }
+                                                        if (item_snapshot.getKey().equals("facultate")) {
+                                                            facultate[0] = item_snapshot.getValue().toString();
+                                                        }
+                                                        if (item_snapshot.getKey().equals("email")) {
+                                                            email[0] = item_snapshot.getValue().toString();
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+        );
 
         return binding.getRoot();
     }
@@ -83,7 +188,7 @@ public class StatisticsFragment extends Fragment {
 
                 Iterator iterator = dataSnapshot.getChildren().iterator();
                 while (iterator.hasNext()) {
-                    String course = ((DataSnapshot)iterator.next()).getKey().toString();
+                    String course = ((DataSnapshot) iterator.next()).getKey();
                     courses.add(course);
                 }
 
@@ -100,7 +205,7 @@ public class StatisticsFragment extends Fragment {
                                 ArrayList<String> materii = new ArrayList<>();
                                 Iterator it = dataSnapshot.getChildren().iterator();
                                 while (it.hasNext()) {
-                                    String course = ((DataSnapshot)it.next()).getKey().toString();
+                                    String course = ((DataSnapshot) it.next()).getKey();
                                     materii.add(course);
                                 }
 
@@ -111,7 +216,7 @@ public class StatisticsFragment extends Fragment {
                                 for (String course: copie) {
                                     int bec = 0;
                                     for (String materie: materii) {
-                                        Log.i("ceapamasii", course + " " + abrevieri.get(materie) + "Size" + String.valueOf(courses.size()));
+                                        Log.i("ceapamasii", course + " " + abrevieri.get(materie) + "Size" + courses.size());
                                         if (course.contains(abrevieri.get(materie)) == true) {
                                             bec = 1;
                                         }
@@ -128,7 +233,7 @@ public class StatisticsFragment extends Fragment {
                                     reference.child(course).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                                         @Override
                                         public void onSuccess(DataSnapshot dataSnapshot) {
-                                            Log.i("count",course + " " + String.valueOf(dataSnapshot.getChildrenCount()));
+                                            Log.i("count", course + " " + dataSnapshot.getChildrenCount());
                                             waitForRetrieveData();
                                             stats.add((int) dataSnapshot.getChildrenCount());
                                         }
@@ -181,7 +286,7 @@ public class StatisticsFragment extends Fragment {
             public void onSuccess(DataSnapshot dataSnapshot) {
                 Iterator it = dataSnapshot.getChildren().iterator();
                 while (it.hasNext()) {
-                    String course = ((DataSnapshot)it.next()).getKey().toString();
+                    String course = ((DataSnapshot) it.next()).getKey();
                     courseList.add(course);
                 }
 
@@ -209,4 +314,13 @@ public class StatisticsFragment extends Fragment {
             }
         });
     }
+
+    private boolean checkAndRequestPermissions() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                    PERMISSIONS_REQUEST_WRITE_STORAGE);
+        }
+        return true;
+    }
+
 }
