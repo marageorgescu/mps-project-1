@@ -1,6 +1,6 @@
 # mps-project-1
 
-***<p>README PROIECT 1 MPS***<br>
+**<p>README PROIECT 1 MPS**<br>
 QResent<br>
 <br>
 &nbsp&nbsp&nbsp&nbsp- aplicație Android pentru digitalizarea sistemului de prezență, atât pentru formatul fizic, cât și pentru formatul online, pe baza generării de QR code-uri<br>
