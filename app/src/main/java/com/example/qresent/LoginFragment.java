@@ -158,7 +158,8 @@ public class LoginFragment extends Fragment {
                     hashMap.put("name", mAuth.getCurrentUser().getDisplayName());
                     hashMap.put("grupa", "-");
                     hashMap.put("facultate", "UPB");
-                    hashMap.put("email", mAuth.getCurrentUser().getEmail());
+
+                    hashMap.put("email", "-");
                     hashMap.put("accountType", "Student");
 
                     //Firebase database instance
@@ -167,7 +168,7 @@ public class LoginFragment extends Fragment {
                     //put data within hashmap in database
                     myRef.child(mAuth.getCurrentUser().getUid()).setValue(hashMap);
 
-                    Navigation.findNavController(view_global).navigate(R.id.action_loginFragment_to_studentHomeScreenFragment);
+                    Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_studentHomeScreenFragment);
                 } else {
                     Log.d(TAG, "task failed");
                 }
