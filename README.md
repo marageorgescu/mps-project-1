@@ -5,7 +5,7 @@
 <br>
 &nbsp&nbsp&nbsp&nbsp- aplicație Android pentru digitalizarea sistemului de prezență, atât pentru formatul fizic, cât și pentru formatul online, pe baza generării de QR code-uri<br>
 <br>
-Aplicatia a fost creata cu ajutorul:<br>
+*Aplicatia a fost creata cu ajutorul:*<br>
 &nbsp&nbsp&nbsp&nbsp- Java<br>
 &nbsp&nbsp&nbsp&nbsp- Android Studio<br>
 <br>
