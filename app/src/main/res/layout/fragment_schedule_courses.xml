@@ -16,7 +16,7 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center|center_vertical"
-                android:text="Cursuri"
+                android:text="Orar"
                 android:textSize="50sp"/>
 
         <LinearLayout

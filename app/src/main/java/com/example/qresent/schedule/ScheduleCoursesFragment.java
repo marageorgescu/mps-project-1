@@ -1,7 +1,6 @@
 package com.example.qresent.schedule;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +16,16 @@ import com.example.qresent.databinding.FragmentScheduleCoursesBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class ScheduleCoursesFragment extends Fragment {
 
-    private final ArrayList<String> courses = new ArrayList<String>(Arrays.asList("Managementul proiectelor software", "Sisteme multiprocesor", "Programare Web",
-            "Proiectarea retellor", "Sisteme multiprocesor", "Sisteme multiprocesor", "Sisteme multiprocesor", "Sisteme multiprocesor", "Sisteme multiprocesor", "Managementul proiectelor software",
-            "Managementul proiectelor software", "Managementul proiectelor software", "Managementul proiectelor software"));
-    FirebaseAuth firebaseAuth;
+    //    private final ArrayList<String> courses = new ArrayList<String>(Arrays.asList("Managementul proiectelor software", "Sisteme multiprocesor", "Programare Web",
+//            "Proiectarea retellor", "Sisteme multiprocesor", "Sisteme multiprocesor", "Sisteme multiprocesor", "Sisteme multiprocesor", "Sisteme multiprocesor", "Managementul proiectelor software",
+//            "Managementul proiectelor software", "Managementul proiectelor software", "Managementul proiectelor software"));
+    private FirebaseAuth firebaseAuth;
+    private ArrayList<String> courses;
+    private ArrayList<Integer> timings;
     private FragmentScheduleCoursesBinding binding;
 
     @Override
@@ -38,13 +38,15 @@ public class ScheduleCoursesFragment extends Fragment {
                 container,
                 false
         );
-        Log.i("tagda", "dadadadad");
+
+        courses = (ArrayList<String>) getArguments().getSerializable("courses");
+        timings = (ArrayList<Integer>) getArguments().getSerializable("timings");
 
         firebaseAuth = FirebaseAuth.getInstance();
         binding.coursesLL.setOrientation(LinearLayout.VERTICAL);
         RecyclerView scrollCourses = binding.scrollCourses;
         scrollCourses.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        ScheduleCoursesAdapter adapter = new ScheduleCoursesAdapter(courses, this.getContext());
+        ScheduleCoursesAdapter adapter = new ScheduleCoursesAdapter(courses, timings, this.getContext());
         scrollCourses.setAdapter(adapter);
 
         return binding.getRoot();
