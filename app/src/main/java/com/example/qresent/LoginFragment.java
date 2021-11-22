@@ -45,6 +45,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 
@@ -150,7 +151,23 @@ public class LoginFragment extends Fragment {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "task is successful");
                     FirebaseUser user = mAuth.getCurrentUser();
-                    updateUI(user, view_global);
+                    //updateUI(user, view_global);
+
+                    HashMap<Object, String> hashMap = new HashMap<>();
+                    hashMap.put("uid", mAuth.getCurrentUser().getUid());
+                    hashMap.put("name", mAuth.getCurrentUser().getDisplayName());
+                    hashMap.put("grupa", "-");
+                    hashMap.put("facultate", "UPB");
+                    hashMap.put("email", mAuth.getCurrentUser().getEmail());
+                    hashMap.put("accountType", "Student");
+
+                    //Firebase database instance
+                    FirebaseDatabase database = FirebaseDatabase.getInstance("https://qresent-926c3-default-rtdb.europe-west1.firebasedatabase.app/");
+                    DatabaseReference myRef = database.getReference("Users");
+                    //put data within hashmap in database
+                    myRef.child(mAuth.getCurrentUser().getUid()).setValue(hashMap);
+
+                    Navigation.findNavController(view_global).navigate(R.id.action_loginFragment_to_studentHomeScreenFragment);
                 } else {
                     Log.d(TAG, "task failed");
                 }
@@ -300,6 +317,21 @@ public class LoginFragment extends Fragment {
                         FirebaseUser user = mAuth.getCurrentUser();
                         Toast.makeText(getActivity(), "signInWithCredential:success", Toast.LENGTH_SHORT).show();
                         //updateUI(user, null);
+
+                        HashMap<Object, String> hashMap = new HashMap<>();
+                        hashMap.put("uid", mAuth.getCurrentUser().getUid());
+                        hashMap.put("name", mAuth.getCurrentUser().getDisplayName());
+                        hashMap.put("grupa", "-");
+                        hashMap.put("facultate", "UPB");
+                        hashMap.put("email", mAuth.getCurrentUser().getEmail());
+                        hashMap.put("accountType", "Student");
+
+                        //Firebase database instance
+                        FirebaseDatabase database = FirebaseDatabase.getInstance("https://qresent-926c3-default-rtdb.europe-west1.firebasedatabase.app/");
+                        DatabaseReference myRef = database.getReference("Users");
+                        //put data within hashmap in database
+                        myRef.child(mAuth.getCurrentUser().getUid()).setValue(hashMap);
+
                         Navigation.findNavController(view_global).navigate(R.id.action_loginFragment_to_studentHomeScreenFragment);
                     } else {
                         // If sign in fails, display a message to the user.
