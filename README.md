@@ -13,6 +13,8 @@ Tehnologii folosite:<br>
 &nbsp&nbsp&nbsp&nbsp- Firebase Realtime Database<br>
 &nbsp&nbsp&nbsp&nbsp- Firebase Authentication: Email and Password Sign-Up/Sign-In, Google Sign-In, Facebook Sign-In, Password Recovery, Logout<br></p>
 
+<img src="Images/Screenshot_1637612448.png" width="200">     <img src="Images/Screenshot_1637612463.png" width="200">     <img src="Images/Screenshot_1637630728.png" width="200">
+
 
 <p><br>
 Specificații Student:<br>
@@ -20,6 +22,9 @@ Specificații Student:<br>
 &nbsp&nbsp&nbsp&nbsp- vizualizarea cursurilor la care este înrolat și a descrierilor acestora (punctaj, praguri, data examenelor, bonusuri)<br>
 &nbsp&nbsp&nbsp&nbsp- vizualizarea orarului<br>
 &nbsp&nbsp&nbsp&nbsp- posibilitatea scanării QR code-ului generat de profesor pentru prezență<br></p>
+
+<img src="Images/Screenshot_1637630785.png" width="200">     <img src="Images/Screenshot_1637630790.png" width="200">     <img src="Images/Screenshot_1637630801.png" width="200">
+
 <p><br>
 Specificații Profesor:<br>
 &nbsp&nbsp&nbsp&nbsp- vizualizarea datelor personale (nume, email, facultate)<br>
@@ -27,6 +32,9 @@ Specificații Profesor:<br>
 &nbsp&nbsp&nbsp&nbsp- vizualizarea orarului<br>
 &nbsp&nbsp&nbsp&nbsp- generarea de cod QR pe baza unui sir de caractere introdus<br>
 &nbsp&nbsp&nbsp&nbsp- vizualizarea statisticilor cu numărul de prezențe și exportarea listei de prezență<br></p>
+
+<img src="Images/Screenshot_1637630842.png" width="200">     <img src="Images/Screenshot_1637630874.png" width="200">
+
 <p><br>
 Specificații Admin:<br>
 &nbsp&nbsp&nbsp&nbsp- vizualizarea datelor personale (nume, email, facultate)<br>
