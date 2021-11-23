@@ -32,4 +32,12 @@ Specificații Admin:<br>
 &nbsp&nbsp&nbsp&nbsp- exportarea listei de prezență<br>
 &nbsp&nbsp&nbsp&nbsp- înrolarea unui student la un anumit curs<br>
 &nbsp&nbsp&nbsp&nbsp- adăugarea unui profesor la un curs/laborator<br>
+<br>
+Contributori:<br>
+&nbsp&nbsp&nbsp&nbsp- Andrei Mocanu<br>
+&nbsp&nbsp&nbsp&nbsp- Mara Georgescu<br>
+&nbsp&nbsp&nbsp&nbsp- Nicolae Nițu<br>
+&nbsp&nbsp&nbsp&nbsp- Olivia Oprea<br>
+&nbsp&nbsp&nbsp&nbsp- Victor Barbu<br>
+&nbsp&nbsp&nbsp&nbsp- Cosmin Cojocaru<br>
 </p>
