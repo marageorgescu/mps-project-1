@@ -24,7 +24,9 @@
             android:id="@+id/infoTv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:layout_marginLeft="15dp"
+            android:textSize="20sp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/gotocoursesBtn"

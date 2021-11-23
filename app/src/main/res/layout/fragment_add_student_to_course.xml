@@ -21,16 +21,22 @@
             android:textSize="50sp"/>
 
         <Spinner
+            android:layout_gravity="center_horizontal"
             android:id="@+id/studentSpinner"
-            android:layout_width="400dp"
+            android:layout_width="300dp"
             android:layout_height="0dp"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.5"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
 
         <Spinner
+            android:layout_gravity="center_horizontal"
             android:id="@+id/studentcourseSpinner"
-            android:layout_width="400dp"
+            android:layout_width="300dp"
             android:layout_height="0dp"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.5"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/addstudentBtn"

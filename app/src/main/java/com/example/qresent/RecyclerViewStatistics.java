@@ -20,10 +20,12 @@ public class RecyclerViewStatistics extends RecyclerView.Adapter<RecyclerViewSta
 
     ArrayList<Integer> statsList;
     ArrayList<String> coursesList;
+    ArrayList<Integer> totalList;
     AdapterView.OnItemClickListener onItemClickListener;
-    public RecyclerViewStatistics(ArrayList<Integer> statsList, ArrayList<String> coursesList, Context context) {
+    public RecyclerViewStatistics(ArrayList<Integer> statsList, ArrayList<String> coursesList, ArrayList<Integer> totalList, Context context) {
         this.statsList = statsList;
         this.coursesList = coursesList;
+        this.totalList = totalList;
         Log.i("recycler view stats", coursesList.get(0));
     }
 
@@ -37,7 +39,7 @@ public class RecyclerViewStatistics extends RecyclerView.Adapter<RecyclerViewSta
     @Override
     public void onBindViewHolder(RecyclerViewStatistics.ViewHolder holder, int position) {
         holder.text.setText(coursesList.get(position).toString());
-        int presentPercent = (int) ((((double)statsList.get(position) / 25.0)) * 100);
+        int presentPercent = (int) ((((double)statsList.get(position) / (double) totalList.get(position))) * 100);
         int absentPercent = 100 - presentPercent;
 
         Log.i("Procentele", "PROC" + presentPercent);
@@ -54,7 +56,7 @@ public class RecyclerViewStatistics extends RecyclerView.Adapter<RecyclerViewSta
                 presentPercent
         );
         holder.absenceLayout.setLayoutParams(absentParams);
-        holder.textPresence.setText(statsList.get(position).toString() + "/25");
+        holder.textPresence.setText(statsList.get(position).toString() + "/" + totalList.get(position).toString());
 
     }
 

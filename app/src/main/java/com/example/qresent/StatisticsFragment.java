@@ -58,6 +58,7 @@ public class StatisticsFragment extends Fragment {
     private final File filePath = new File(Environment.getExternalStorageDirectory() + "/Demo.xls");
     private final ArrayList<Integer> stats = new ArrayList<Integer>();
     private final ArrayList<String> courses = new ArrayList<String>();
+    private final ArrayList<Integer> total = new ArrayList<Integer>();
     int nrCourses;
     RecyclerView scrollStats;
     FirebaseDatabase database;
@@ -215,6 +216,11 @@ public class StatisticsFragment extends Fragment {
 
                                 for (String course: copie) {
                                     int bec = 0;
+                                    if (course.contains("curs")) {
+                                        total.add(100);
+                                    } else if (course.contains("lab")) {
+                                        total.add(20);
+                                    }
                                     for (String materie: materii) {
                                         Log.i("ceapamasii", course + " " + abrevieri.get(materie) + "Size" + courses.size());
                                         if (course.contains(abrevieri.get(materie)) == true) {
@@ -270,7 +276,7 @@ public class StatisticsFragment extends Fragment {
         nrCourses--;
         if(nrCourses == 0)
         {
-            RecyclerViewStatistics adapter = new RecyclerViewStatistics(stats, courses, getActivity());
+            RecyclerViewStatistics adapter = new RecyclerViewStatistics(stats, courses, total, getActivity());
             scrollStats.setAdapter(adapter);
         }
 

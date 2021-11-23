@@ -21,14 +21,16 @@
                 android:id="@+id/previousMonthButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:background="@null"
                 android:onClick="previousMonthAction"
-                android:text="@string/back"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:cornerRadius="100dp"/>
+                app:cornerRadius="100dp"
+                app:iconSize="30dp"
+                app:icon="@drawable/iconsleftarrow"
+                android:layout_marginLeft="15dp"/>
 
             <TextView
                 android:id="@+id/monthYearTV"
@@ -44,14 +46,16 @@
                 android:id="@+id/nextMonthButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:background="@null"
                 android:onClick="nextMonthAction"
-                android:text="@string/forward"
+                app:icon="@drawable/iconsrightarrow"
+                app:iconSize="30dp"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:cornerRadius="100dp"/>
+                app:cornerRadius="100dp"
+                android:layout_marginRight="15dp"/>
 
         </LinearLayout>
 
