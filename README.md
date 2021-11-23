@@ -12,6 +12,8 @@ Aplicatia a fost creata cu ajutorul:<br>
 Tehnologii folosite:<br>
 &nbsp&nbsp&nbsp&nbsp- Firebase Realtime Database<br>
 &nbsp&nbsp&nbsp&nbsp- Firebase Authentication: Email and Password Sign-Up/Sign-In, Google Sign-In, Facebook Sign-In, Password Recovery, Logout<br></p>
+![Screenshot_1637612448](https://user-images.githubusercontent.com/49337453/142959071-b185fc65-0412-4595-824b-c73a80b95e2b.png)
+
 <p><br>
 Specificații Student:<br>
 &nbsp&nbsp&nbsp&nbsp- vizualizarea datelor personale (nume, email, facultate, grupa)<br>
